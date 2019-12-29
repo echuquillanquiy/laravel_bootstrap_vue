@@ -23,7 +23,5 @@
                 <label for="content">Contenido</label>
                 <textarea readonly class="form-control" name="content" id="content" rows="3">{{$post->content}}</textarea>
         </div>
-        
-        <input class="btn btn-primary" type="submit" value="Enviar">
     </form>
 @endsection

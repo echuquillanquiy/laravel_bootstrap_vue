@@ -2,7 +2,7 @@
 
 @section('content')
 
-<a class="btn btn-success mt-3 mb-3" href="{{ route('post.create') }}">
+<a class="btn btn-success mt-3 mb-3" href="{{ route('category.create') }}">
     Crear
 </a>
 <div class="table-responsive">
@@ -11,7 +11,6 @@
             <tr>
                 <td>Id</td>
                 <td>Nombre</td>
-                <td>Posteado</td>
                 <td>Creación</td>
                 <td>Actualización</td>
                 <td>Acciones</td>
@@ -19,17 +18,16 @@
         </thead>
         
         <tbody>
-            @foreach ($posts as $post)
+            @foreach ($categories as $category)
             <tr>
-                <td>{{ $post->id }}</td>
-                <td>{{ $post->title }}</td>
-                <td>{{ $post->posted }}</td>
-                <td>{{ $post->created_at->format('Y-m-d') }}</td>
-                <td>{{ $post->updated_at->format('Y-m-d') }}</td>
+                <td>{{ $category->id }}</td>
+                <td>{{ $category->title }}</td>
+                <td>{{ $category->created_at->format('Y-m-d') }}</td>
+                <td>{{ $category->updated_at->format('Y-m-d') }}</td>
                 <td>
-                    <a class="btn btn-success" href="{{ route('post.show', $post->id) }}">Ver</a>
-                    <a class="btn btn-primary" href="{{ route('post.edit', $post->id) }}">Actualizar</a>
-                    <button data-toggle="modal" data-target="#deleteModal" data-id="{{ $post->id }}" class="btn btn-danger">Eliminar</button>
+                    <a class="btn btn-success" href="{{ route('category.show', $category->id) }}">Ver</a>
+                    <a class="btn btn-primary" href="{{ route('category.edit', $category->id) }}">Actualizar</a>
+                    <button data-toggle="modal" data-target="#deleteModal" data-id="{{ $category->id }}" class="btn btn-danger">Eliminar</button>
                 </td>
             </tr>
             @endforeach
@@ -37,7 +35,7 @@
     </table>
 </div>
 
-{{ $posts->links() }}
+{{ $categories->links() }}
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -54,7 +52,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             
-            <form id="formDelete" method="POST" action="{{ route('post.destroy', 0) }}" data-action="{{ route('post.destroy', 0) }}">
+            <form id="formDelete" method="POST" action="{{ route('category.destroy', 0) }}" data-action="{{ route('category.destroy', 0) }}">
                 @method('DELETE')
                 @csrf
                 <button type="submit" class="btn btn-danger">Eliminar!</button>
@@ -81,7 +79,7 @@
     $('#formDelete').attr('action', action)
     
     var modal = $(this)
-    modal.find('.modal-title').text('Vas a borrar el Post: ' + id)
+    modal.find('.modal-title').text('Vas a borrar la categoria: ' + id)
     });
 }
 </script>

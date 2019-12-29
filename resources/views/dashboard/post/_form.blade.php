@@ -1,5 +1,3 @@
-
-
         @csrf
         <div class="form-group">
             <label for="title">Título</label>
@@ -13,6 +11,22 @@
         <div class="form-group">
             <label for="url_clean">Url limpia</label>
             <input class="form-control" name="url_clean" id="url_clean" value="{{ old('url_clean', $post->url_clean) }}">
+        </div>
+
+        <div class="form-group">
+            <label for="category_id">Categorías</label>
+            <select class="form-control" name="category_id">
+                @foreach ($categories as $title => $id )
+                    <option {{ $post->category_id == $id ? 'selected="selected"' : ''}} value="{{ $id }}">{{ $title }}</option>
+                @endforeach
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="posted">Posted</label>
+            <select class="form-control" name="posted">
+                @include('dashboard.partials.option-yes-not', ['val' => $post->posted])
+            </select>
         </div>
     
         <div class="form-group">

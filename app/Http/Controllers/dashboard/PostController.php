@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostPost;
 use App\Post;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -34,7 +35,8 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        return view('dashboard.post.edit', compact('post'));
+        $categories = Category::pluck('id', 'title');
+        return view('dashboard.post.edit', compact('post', 'categories'));
     }
 
     public function update(StorePostPost $request, Post $post)
@@ -46,6 +48,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return back()->with('status', 'Post elimnado con exito!');
+        return back()->with('status', 'Post eliminada con exito!');
     }
 }
